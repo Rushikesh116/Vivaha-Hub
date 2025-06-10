@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profiles - Vivaha Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header>
+        <h1>Vivaha Hub</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="profiles.html">Browse Profiles</a>
+            <a href="contact.html">Contact</a>
+            <a href="dashboard.html">My Dashboard</a>
+        </nav>
+    </header>
+    <main>
+        <div class="profiles-container">
+            <h2>Available Profiles</h2>
+            <div class="profile-filters">
+                <select id="ageFilter">
+                    <option value="">Age Range</option>
+                    <option value="18-25">18-25</option>
+                    <option value="26-35">26-35</option>
+                    <option value="36-45">36-45</option>
+                    <option value="46-80">46+</option>
+                </select>
+                <select id="locationFilter">
+                    <option value="">Location</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                </select>
+                <select id="educationFilter">
+                    <option value="">Education</option>
+                    <option value="B.Tech">Bachelor's Degree</option>
+                    <option value="M.Tech">Master's Degree</option>
+                    <option value="MBBS">MBBS</option>
+                </select>
+                <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+            </div>
+            <div id="profilesGrid" class="profile-grid"></div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search Profiles</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Safety Tips</a></li>
+                    <li><a href="#">Customer Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li>📍 123 Wedding Street, Love City</li>
+                    <li>📞 +91 1234567890</li>
+                    <li>✉️ contact@vivahahub.com</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">LinkedIn</a>
+                </div>
+                <div class="app-download">
+                    <h4>Download Our App</h4>
+                    <div class="app-buttons">
+                        <a href="#" class="app-btn">App Store</a>
+                        <a href="#" class="app-btn">Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Vivaha Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
