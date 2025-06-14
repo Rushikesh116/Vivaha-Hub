@@ -39,61 +39,169 @@ document.addEventListener('DOMContentLoaded', function() {
         logoutBtn.style.display = 'none';
     }
 
-    // Registration form handler
+    // Multi-step form handling
     const registerForm = document.querySelector('.register-form');
     if (registerForm) {
+        const formSteps = registerForm.querySelectorAll('.form-step');
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const nextButtons = registerForm.querySelectorAll('.next-step');
+        const prevButtons = registerForm.querySelectorAll('.prev-step');
+        let currentStep = 0;
+
+        // Initialize the first step
+        showStep(currentStep);
+
+        // Function to show a specific step
+        function showStep(stepIndex) {
+            formSteps.forEach((step, index) => {
+                step.classList.toggle('active', index === stepIndex);
+            });
+
+            progressSteps.forEach((step, index) => {
+                if (index < stepIndex) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index === stepIndex) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+
+            currentStep = stepIndex;
+        }
+
+        // Next button click handler
+        nextButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('Next button clicked.');
+                const currentFormStep = button.closest('.form-step');
+                const inputs = currentFormStep.querySelectorAll('input[required], select[required]');
+                let isValid = true;
+
+                // Validate required fields
+                inputs.forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        input.classList.add('error');
+                        console.log(`Validation failed for: ${input.name || input.id || input.tagName}. Value: '${input.value}'`);
+                    } else {
+                        input.classList.remove('error');
+                    }
+                });
+
+                if (!isValid) {
+                    showToast('Please fill in all required fields.', 'error');
+                    console.log('Validation failed. Showing toast.');
+                    return;
+                }
+
+                // Special validation for email and password in step 1
+                if (currentStep === 0) {
+                    const emailInput = currentFormStep.querySelector('input[name="email"]');
+                    const passwordInput = currentFormStep.querySelector('input[name="password"]');
+                    const confirmPasswordInput = currentFormStep.querySelector('input[name="confirm-password"]');
+
+                    if (emailInput && !isValidEmail(emailInput.value)) {
+                        isValid = false;
+                        emailInput.classList.add('error');
+                        showToast('Please enter a valid email address', 'error');
+                        console.log('Email validation failed.');
+                    }
+
+                    if (passwordInput && passwordInput.value.length < 8) {
+                        isValid = false;
+                        passwordInput.classList.add('error');
+                        showToast('Password must be at least 8 characters long', 'error');
+                        console.log('Password length validation failed.');
+                    }
+
+                    if (confirmPasswordInput && passwordInput && confirmPasswordInput.value !== passwordInput.value) {
+                        isValid = false;
+                        confirmPasswordInput.classList.add('error');
+                        showToast('Passwords do not match', 'error');
+                        console.log('Password confirmation failed.');
+                    }
+
+                    if (!isValid) {
+                        console.log('Step 1 specific validation failed.');
+                        return;
+                    }
+                }
+
+                if (isValid) {
+                    console.log(`Advancing to step ${currentStep + 1}`);
+                    showStep(currentStep + 1);
+                }
+            });
+        });
+
+        // Previous button click handler
+        prevButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                showStep(currentStep - 1);
+            });
+        });
+
+        // Form submission handler
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(registerForm);
             const data = Object.fromEntries(formData);
 
-            // Validation logic
-            let isValid = true;
-            const errors = [];
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email || '')) {
-                errors.push('Please enter a valid email address');
-                isValid = false;
-            }
-
-            // Password validation
-            if ((data.password || '').length < 8) {
-                errors.push('Password must be at least 8 characters long');
-                isValid = false;
-            }
-
-            // Confirm password
-            if (data.password !== data['confirm-password']) {
-                errors.push('Passwords do not match');
-                isValid = false;
-            }
-
-            // Terms and conditions
+            // Final validation
             if (!data.terms) {
-                errors.push('You must agree to the Terms and Conditions');
-                isValid = false;
+                showToast('You must agree to the Terms and Conditions', 'error');
+                return;
             }
 
-            if (isValid) {
-                // Save new user to localStorage
-                const newUser = {
-                    email: data.email,
-                    password: data.password
-                };
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
+            // Save new user to localStorage
+            const newUser = {
+                email: data.email,
+                password: data.password,
+                fullname: data.fullname,
+                gender: data.gender,
+                dob: data.dob,
+                religion: data.religion,
+                zodiac: data.zodiac,
+                education: data.education,
+                occupation: data.occupation,
+                income: data.income,
+                maritalStatus: data['marital-status'],
+                height: data.height,
+                location: data.location,
+                about: data.about,
+                partnerPreferences: data['partner-preferences'],
+                profilePhoto: document.querySelector('.image-preview')?.src || 'images/default-profile.jpg'
+            };
 
-                showToast('Registration successful!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 2000);
-            } else {
-                errors.forEach(error => showToast(error, 'error'));
-            }
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            showToast('Registration successful!', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
         });
+
+        // Profile photo preview
+        const profilePhotoInput = document.getElementById('profile-photo');
+        const profilePreview = document.querySelector('.image-preview');
+
+        if (profilePhotoInput && profilePreview) {
+            profilePhotoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePreview.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
     }
 
     // Login form handler
@@ -101,22 +209,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            const password = this.querySelector('input[type="password"]').value;
-            handleLogin(email, password);
-        });
-    }
+            const formData = new FormData(loginForm);
+            const data = Object.fromEntries(formData);
 
-    // Profile photo preview
-    const imageInput = document.getElementById('profile-photo');
-    if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector('.image-preview').src = e.target.result;
-                }
-                reader.readAsDataURL(e.target.files[0]);
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === data.email && u.password === data.password);
+
+            if (user) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', user.email);
+                localStorage.setItem('userData', JSON.stringify(user));
+                showToast('Login successful!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showToast('Invalid email or password', 'error');
             }
         });
     }
@@ -184,16 +292,28 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', handleScrollAnimations);
 });
 
+// Helper function to validate email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 // Toast notification function
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 100);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
     }, 3000);
 }
 
@@ -223,6 +343,99 @@ function handleLogin(email, password) {
 
 // Sample profile data
 const sampleProfiles = [
+    {
+        id: 7,
+        name: "Maya Patel",
+        age: 29,
+        occupation: "Architect",
+        location: "Bangalore, India",
+        education: "B.Tech",
+        religion: "Hindu",
+        image: "images/rupti.jpg",
+        bio: "Architect with a passion for design and creativity. I love exploring new cultures and experiencing different cuisines. Looking for a life partner who shares my enthusiasm for life and culture.",
+        height: "5'7\"",
+        maritalStatus: "Never Married",
+        motherTongue: "Kannada",
+        workLocation: "Bangalore, India",
+        income: "15-20 LPA",
+        familyType: "Nuclear",
+        familyStatus: "Middle Class",
+        fatherOccupation: "Retired Government Officer",
+        motherOccupation: "Homemaker",
+        partnerPreferences: [
+            "Age between 28-33 years",
+            "Minimum Bachelor's degree",
+            "Architecture or design background",
+            "Family-oriented values",
+            "Based in Bangalore or willing to relocate"
+        ],
+        gallery: [
+            "images/rupti.jpg",
+        ],
+        zodiac: "Libra"
+    },
+    {
+        id: 8,
+        name: "Thomas George",
+        age: 31,
+        occupation: "Professor",
+        location: "Chennai, India",
+        education: "M.Tech",
+        religion: "Christian",
+        image: "images/vinayak.jpg",
+        bio: "Professor with a passion for teaching and research. I enjoy playing cricket and reading books. Looking for a life partner who values growth and adventure.",
+        height: "5'9\"",
+        maritalStatus: "Never Married",
+        motherTongue: "Tamil",
+        workLocation: "Chennai, India",
+        income: "18-25 LPA",
+        familyType: "Nuclear",
+        familyStatus: "Middle Class",
+        fatherOccupation: "Retired Government Officer",
+        motherOccupation: "Homemaker",
+        partnerPreferences: [
+            "Age between 29-34 years",
+            "Minimum Bachelor's degree",
+            "Education background",
+            "Family-oriented values",
+            "Based in Chennai or willing to relocate"
+        ],
+        gallery: [
+            "images/vinayak.jpg",
+        ],
+        zodiac: "Taurus"
+    },
+    {
+        id: 9,
+        name: "Zara Ahmed",
+        age: 28,
+        occupation: "Fashion Designer",
+        location: "Mumbai, India",
+        education: "B.Tech",
+        religion: "Muslim",
+        image: "images/aadi.jpg",
+        bio: "Fashion designer with a passion for fashion and creativity. I love exploring new cultures and experiencing different cuisines. Looking for a life partner who shares my enthusiasm for life and culture.",
+        height: "5'6\"",
+        maritalStatus: "Never Married",
+        motherTongue: "Urdu",
+        workLocation: "Mumbai, India",
+        income: "15-20 LPA",
+        familyType: "Nuclear",
+        familyStatus: "Middle Class",
+        fatherOccupation: "Retired Government Officer",
+        motherOccupation: "Homemaker",
+        partnerPreferences: [
+            "Age between 27-32 years",
+            "Minimum Bachelor's degree",
+            "Fashion or design background",
+            "Family-oriented values",
+            "Based in Mumbai or willing to relocate"
+        ],
+        gallery: [
+            "images/aadi.jpg",
+        ],
+        zodiac: "Libra"
+    },
     {
         id: 1,
         name: "Sarah Johnson",
@@ -409,99 +622,7 @@ const sampleProfiles = [
         ],
         zodiac: "Taurus"
     },
-    {
-        id: 7,
-        name: "Maya Patel",
-        age: 29,
-        occupation: "Architect",
-        location: "Bangalore, India",
-        education: "B.Tech",
-        religion: "Hindu",
-        image: "images/rupti.jpg",
-        bio: "Architect with a passion for design and creativity. I love exploring new cultures and experiencing different cuisines. Looking for a life partner who shares my enthusiasm for life and culture.",
-        height: "5'7\"",
-        maritalStatus: "Never Married",
-        motherTongue: "Kannada",
-        workLocation: "Bangalore, India",
-        income: "15-20 LPA",
-        familyType: "Nuclear",
-        familyStatus: "Middle Class",
-        fatherOccupation: "Retired Government Officer",
-        motherOccupation: "Homemaker",
-        partnerPreferences: [
-            "Age between 28-33 years",
-            "Minimum Bachelor's degree",
-            "Architecture or design background",
-            "Family-oriented values",
-            "Based in Bangalore or willing to relocate"
-        ],
-        gallery: [
-            "images/rupti.jpg",
-        ],
-        zodiac: "Libra"
-    },
-    {
-        id: 8,
-        name: "Thomas George",
-        age: 31,
-        occupation: "Professor",
-        location: "Chennai, India",
-        education: "M.Tech",
-        religion: "Christian",
-        image: "images/vinayak.jpg",
-        bio: "Professor with a passion for teaching and research. I enjoy playing cricket and reading books. Looking for a life partner who values growth and adventure.",
-        height: "5'9\"",
-        maritalStatus: "Never Married",
-        motherTongue: "Tamil",
-        workLocation: "Chennai, India",
-        income: "18-25 LPA",
-        familyType: "Nuclear",
-        familyStatus: "Middle Class",
-        fatherOccupation: "Retired Government Officer",
-        motherOccupation: "Homemaker",
-        partnerPreferences: [
-            "Age between 29-34 years",
-            "Minimum Bachelor's degree",
-            "Education background",
-            "Family-oriented values",
-            "Based in Chennai or willing to relocate"
-        ],
-        gallery: [
-            "images/vinayak.jpg",
-        ],
-        zodiac: "Taurus"
-    },
-    {
-        id: 9,
-        name: "Zara Ahmed",
-        age: 28,
-        occupation: "Fashion Designer",
-        location: "Mumbai, India",
-        education: "B.Tech",
-        religion: "Muslim",
-        image: "images/ram.jpg",
-        bio: "Fashion designer with a passion for fashion and creativity. I love exploring new cultures and experiencing different cuisines. Looking for a life partner who shares my enthusiasm for life and culture.",
-        height: "5'6\"",
-        maritalStatus: "Never Married",
-        motherTongue: "Urdu",
-        workLocation: "Mumbai, India",
-        income: "15-20 LPA",
-        familyType: "Nuclear",
-        familyStatus: "Middle Class",
-        fatherOccupation: "Retired Government Officer",
-        motherOccupation: "Homemaker",
-        partnerPreferences: [
-            "Age between 27-32 years",
-            "Minimum Bachelor's degree",
-            "Fashion or design background",
-            "Family-oriented values",
-            "Based in Mumbai or willing to relocate"
-        ],
-        gallery: [
-            "images/ram.jpg",
-        ],
-        zodiac: "Libra"
-    },
+
     {
         id: 10,
         name: "Arjun Reddy",
