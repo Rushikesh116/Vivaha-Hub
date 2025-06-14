@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Plans - Vivaha Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .premium-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .premium-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 600px) {
+            .plans-grid { grid-template-columns: 1fr; }
+        }
+        .plan-card {
+            border: 2px solid #ecd8cf;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            background: #f9f6f4;
+            transition: box-shadow 0.2s;
+        }
+        .plan-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        }
+        .plan-duration {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .plan-price {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .plan-desc {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .choose-btn {
+            background: gold;
+            color: #333;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .choose-btn:hover {
+            background: #ecd8cf;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary-color);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: white; font-size: 2.5rem; margin: 0; padding: 1rem 0;">Vivaha Hub</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="profiles.html">Browse Profiles</a>
+            <a href="contact.html">Contact</a>
+            <a href="about.html">About Us</a>
+            <a href="dashboard.html">My Dashboard</a>
+        </nav>
+    </header>
+    <main>
+        <div class="premium-container">
+            <div class="premium-title">Choose Your Premium Plan</div>
+            <div class="premium-features" style="margin-bottom:2.5rem;">
+                <h3 style="color:var(--primary-color);margin-bottom:1rem;">Premium Features</h3>
+                <ul style="text-align:left;max-width:400px;margin:0 auto 1.5rem auto;padding-left:1.2em;list-style:square;color:#444;font-size:1.08rem;">
+                    <li>View detailed astrological information</li>
+                    <li>Unlock chat and messaging with matches</li>
+                    <li>See who viewed your profile</li>
+                    <li>Get more profile views per day</li>
+                    <li>Appear at the top of search results</li>
+                    <li>Priority customer support</li>
+                    <li>Access exclusive premium badges</li>
+                    <li>And much more!</li>
+                </ul>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-duration">1 Month</div>
+                    <div class="plan-price">₹499</div>
+                    <div class="plan-desc">Full access for 30 days</div>
+                    <button class="choose-btn" onclick="window.location.href='payment.html?plan=1month'">Pay Now</button>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-duration">3 Months</div>
+                    <div class="plan-price">₹1299</div>
+                    <div class="plan-desc">Save 15% compared to monthly</div>
+                    <button class="choose-btn" onclick="window.location.href='payment.html?plan=3months'">Pay Now</button>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-duration">6 Months</div>
+                    <div class="plan-price">₹2299</div>
+                    <div class="plan-desc">Save 25% compared to monthly</div>
+                    <button class="choose-btn" onclick="window.location.href='payment.html?plan=6months'">Pay Now</button>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-duration">Yearly</div>
+                    <div class="plan-price">₹3999</div>
+                    <div class="plan-desc">Best value for serious seekers</div>
+                    <button class="choose-btn" onclick="window.location.href='payment.html?plan=yearly'">Pay Now</button>
+                </div>
+            </div>
+            <a class="back-btn" href="dashboard.html">&#8592; Back to Dashboard</a>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search Profiles</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Safety Tips</a></li>
+                    <li><a href="#">Customer Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li>📍 Amritapuri, Kollam Dt</li>
+                    <li>📞 +91 7879342614</li>
+                    <li>✉️ vivahahub@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" class="social-link" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/" class="social-link" target="_blank">Instagram</a>
+                    <a href="https://twitter.com/" class="social-link" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/" class="social-link" target="_blank">LinkedIn</a>
+                </div>
+                <div class="app-download">
+                    <h4>Download Our App</h4>
+                    <div class="app-buttons">
+                        <a href="https://www.apple.com/app-store/" class="app-btn" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store" class="app-btn" target="_blank">Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Vivaha Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

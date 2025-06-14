@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Vivaha Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #f5f6fa;
+        }
+        .pay-main-flex {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .pay-form-col {
+            background: #fff;
+            border-radius: 20px 0 0 20px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+            min-width: 370px;
+            max-width: 420px;
+            flex: 1 1 370px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .pay-timer {
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            color: #888;
+            font-size: 1.1rem;
+            text-align: right;
+        }
+        .pay-form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: #d32f2f;
+            letter-spacing: -1px;
+        }
+        .pay-form-group {
+            margin-bottom: 1.5rem;
+        }
+        .pay-label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            display: block;
+            color: #222;
+        }
+        .pay-helper {
+            color: #888;
+            font-size: 0.98rem;
+            margin-bottom: 0.5rem;
+        }
+        .pay-input-wrap {
+            display: flex;
+            align-items: center;
+            background: #f7f7fa;
+            border-radius: 10px;
+            border: 1.5px solid #e0e0e0;
+            padding: 0.7rem 1rem;
+        }
+        .pay-input-wrap input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 1.1rem;
+            flex: 1;
+            color: #222;
+        }
+        .pay-input-wrap svg {
+            margin-right: 0.7rem;
+            color: #bbb;
+            font-size: 1.2rem;
+        }
+        .pay-input-wrap input::placeholder {
+            color: #bbb;
+        }
+        .pay-expiry-cvv {
+            display: flex;
+            gap: 1rem;
+            max-width: 320px;
+            width: 100%;
+        }
+        .pay-expiry-cvv .pay-input-wrap {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .pay-expiry-cvv input {
+            width: 100%;
+            min-width: 0;
+        }
+        .pay-btn {
+            background: #d32f2f;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .pay-btn:hover {
+            background: #b71c1c;
+        }
+        .pay-back {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #d32f2f;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .pay-right-col {
+            background: #f5f6fa;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+            min-width: 370px;
+            max-width: 420px;
+            flex: 1 1 370px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pay-card-mockup {
+            background: #25334a;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            color: #fff;
+            min-height: 180px;
+            min-width: 320px;
+            max-width: 350px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+        }
+        .pay-card-mockup .pay-card-top {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .pay-card-mockup .pay-chip {
+            width: 38px;
+            height: 28px;
+            background: #e0c08d;
+            border-radius: 6px 6px 8px 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            margin-bottom: 0.5rem;
+        }
+        .pay-card-mockup .pay-card-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .pay-card-mockup .pay-card-number {
+            font-size: 1.3rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+            margin: 1.2rem 0 0.7rem 0;
+        }
+        .pay-card-mockup .pay-card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pay-card-mockup .pay-card-name {
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .pay-card-mockup .pay-card-expiry {
+            font-size: 1rem;
+        }
+        .pay-card-mockup .pay-card-logo {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            background: radial-gradient(circle at 70% 30%,#ff9800 60%,#d84315 100%);
+            border-radius: 50%;
+            opacity: 0.85;
+        }
+        .pay-order-summary {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem;
+            width: 100%;
+            max-width: 350px;
+        }
+        .pay-order-summary-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: #222;
+        }
+        .pay-order-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.7rem;
+            color: #444;
+        }
+        @media (max-width: 900px) {
+            .pay-main-flex {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .pay-form-col, .pay-right-col {
+                border-radius: 20px;
+                max-width: 100%;
+                min-width: unset;
+                margin-bottom: 2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .pay-main-flex {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.5rem 0;
+            }
+            .pay-form-col, .pay-right-col {
+                min-width: 0;
+                max-width: 100%;
+                border-radius: 20px 20px 0 0;
+                padding: 1rem 0.7rem;
+            }
+            .pay-right-col {
+                border-radius: 0 0 20px 20px;
+                margin-top: 0;
+            }
+            .pay-card-mockup {
+                min-width: 0;
+                max-width: 100%;
+                padding: 1rem 0.5rem;
+                font-size: 0.95rem;
+            }
+            .pay-order-summary {
+                max-width: 100%;
+                padding: 1rem 0.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .pay-form-title {
+                font-size: 1.2rem;
+            }
+            .pay-card-mockup {
+                font-size: 0.85rem;
+                padding: 0.7rem 0.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+    <div class="pay-main-flex">
+        <div class="pay-form-col">
+            <div class="pay-form-title">Payment Details</div>
+            <div id="amountPaid" style="font-size:1.2rem;font-weight:600;color:#222;margin-bottom:1.2rem;"></div>
+            <form id="paymentForm">
+                <div class="pay-form-group">
+                    <label class="pay-label">Card Number</label>
+                    <div class="pay-helper">Enter the 16-digit card number on the card</div>
+                    <div class="pay-input-wrap">
+                        <i class="fa-regular fa-credit-card"></i>
+                        <input type="text" id="inputCard" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" required>
+                    </div>
+                </div>
+                <div class="pay-form-group">
+                    <label class="pay-label">Card Name Holder</label>
+                    <div class="pay-helper">Enter name card holder on the card</div>
+                    <div class="pay-input-wrap">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="inputName" placeholder="enter your name" required>
+                    </div>
+                </div>
+                <div class="pay-form-group">
+                    <label class="pay-label">CVV Number</label>
+                    <div class="pay-helper">Enter the 3 or 4 digits number on the card</div>
+                    <div class="pay-input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="text" id="inputCVV" maxlength="4" placeholder="XXX" required>
+                    </div>
+                </div>
+                <div class="pay-form-group">
+                    <label class="pay-label">Expiry Date</label>
+                    <div class="pay-helper">Enter the expiration date of the card</div>
+                    <div class="pay-expiry-cvv">
+                        <div class="pay-input-wrap">
+                            <input type="text" id="inputExpiryMM" maxlength="2" placeholder="MM" required>
+                        </div>
+                        <span style="align-self:center;font-size:1.2em;color:#bbb;">/</span>
+                        <div class="pay-input-wrap">
+                            <input type="text" id="inputExpiryYY" maxlength="2" placeholder="YY" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="pay-btn">Pay Now</button>
+            </form>
+            <a class="pay-back" href="premium.html">&#8592; Back to Plans</a>
+        </div>
+        <div class="pay-right-col">
+            <div class="pay-card-mockup">
+                <div class="pay-card-top">
+                    <div class="pay-chip"></div>
+                    <span class="pay-card-brand">VIVAHACARD</span>
+                </div>
+                <div class="pay-card-number" id="mockCardNumber">•••• •••• •••• ••••</div>
+                <div class="pay-card-bottom">
+                    <span class="pay-card-name" id="mockCardName">CARDHOLDER</span>
+                    <span class="pay-card-expiry" id="mockCardExpiry">MM/YY</span>
+                </div>
+                <div class="pay-card-logo"></div>
+            </div>
+            <div class="pay-order-summary">
+                <div class="pay-order-summary-title">Order Summary</div>
+                <div class="pay-order-row"><span>Order Number</span><span id="orderNumber">-</span></div>
+                <div class="pay-order-row"><span>Vat (10%)</span><span id="orderVat">-</span></div>
+            </div>
+        </div>
+    </div>
+    <div id="paymentStatus" style="display:none;text-align:center;margin-top:2rem;"></div>
+    <script>
+    // Card live update
+    const inputCard = document.getElementById('inputCard');
+    const inputName = document.getElementById('inputName');
+    const inputExpiryMM = document.getElementById('inputExpiryMM');
+    const inputExpiryYY = document.getElementById('inputExpiryYY');
+    const mockCardNumber = document.getElementById('mockCardNumber');
+    const mockCardName = document.getElementById('mockCardName');
+    const mockCardExpiry = document.getElementById('mockCardExpiry');
+    function formatCardNumber(val) {
+        // Remove all non-digits
+        val = val.replace(/[^0-9]/g, '');
+        // Pad to 16 characters with •
+        val = (val + '•'.repeat(16)).slice(0, 16);
+        // Group into 4s with a single space
+        return val.match(/.{1,4}/g).join(' ');
+    }
+    inputCard.addEventListener('input', function() {
+        mockCardNumber.textContent = formatCardNumber(this.value);
+    });
+    inputName.addEventListener('input', function() {
+        mockCardName.textContent = this.value ? this.value.toUpperCase() : 'CARDHOLDER';
+    });
+    function updateExpiry() {
+        let mm = inputExpiryMM.value.padEnd(2,'M');
+        let yy = inputExpiryYY.value.padEnd(2,'Y');
+        mockCardExpiry.textContent = mm + '/' + yy;
+    }
+    inputExpiryMM.addEventListener('input', updateExpiry);
+    inputExpiryYY.addEventListener('input', updateExpiry);
+
+    // Order summary
+    function randomOrderNumber() {
+        return Math.floor(10000000 + Math.random()*90000000);
+    }
+    document.getElementById('orderNumber').textContent = randomOrderNumber();
+    // Example VAT calculation
+    document.getElementById('orderVat').textContent = '₹50.00';
+
+    let planAmount = '₹499';
+    const params = new URLSearchParams(window.location.search);
+    let plan = params.get('plan');
+    if(plan === '1month') planAmount = '₹499';
+    else if(plan === '3months') planAmount = '₹1299';
+    else if(plan === '6months') planAmount = '₹2299';
+    else if(plan === 'yearly') planAmount = '₹3999';
+    document.getElementById('amountPaid').textContent = 'Amount to Pay: ' + planAmount;
+
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = this;
+        const statusDiv = document.getElementById('paymentStatus');
+        form.style.display = 'none';
+        statusDiv.style.display = 'block';
+        statusDiv.innerHTML = '<div style="font-size:1.3rem;margin-bottom:1.5rem;"><i class="fa fa-spinner fa-spin"></i> Processing Payment...</div>';
+        setTimeout(function() {
+            statusDiv.innerHTML = '<div style="font-size:2rem;color:#43a047;"><i class="fa fa-check-circle"></i> Payment Successful!</div><div style="margin-top:1rem;font-size:1.1rem;">Thank you for your purchase.</div>';
+        }, 2000);
+    });
+    </script>
+</body>
+</html> 
