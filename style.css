@@ -26,7 +26,7 @@ body {
 }
 
 header {
-    background: var(--gradient);
+    background:var(--gradient);
     color: var(--white);
     padding: 1.5rem;
     text-align: center;
@@ -40,7 +40,7 @@ header h1 {
 }
 
 nav {
-    background: #c2185b;
+    background:var(--gradient);
     padding: 1rem;
     text-align: center;
     position: sticky;
@@ -184,6 +184,33 @@ nav a:hover {
     }
     header h1 {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 0 0.5rem;
+    }
+    nav {
+        padding: 0.3rem;
+    }
+    nav a {
+        display: block;
+        margin: 0.3rem 0;
+        font-size: 1rem;
+    }
+    header img {
+        height: 40px !important;
+    }
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+    .footer-section ul {
+        padding-left: 0;
     }
 }
 
