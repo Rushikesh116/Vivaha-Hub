@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Vivaha Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+    <style>
+        .about-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .about-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .developer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .developer-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .developer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .developer-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .developer-info {
+            padding: 1.5rem;
+        }
+
+        .developer-info h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-info .role {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .developer-info p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="color: white; font-size: 2.5rem; margin: 0; padding: 1rem 0;">Vivaha Hub</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="search.html">Search</a>
+            <a href="profiles.html">Browse Profiles</a>
+            <a href="contact.html">Contact</a>
+            <a href="about.html">About Us</a>
+            <a href="dashboard.html">My Dashboard</a>
+        </nav>
+    </header>
+    <main>
+        <div class="about-container">
+            <div class="about-header">
+                <h2>Meet Our Team</h2>
+                <p>We are a dedicated team of developers passionate about creating meaningful connections through technology.</p>
+            </div>
+            <div class="developer-grid">
+                <a href="https://rushikesh116.github.io/Portfolio/" class="developer-card" target="_blank">
+                    <img src="images/rushikesh.jpg" alt="Rushikesh Yadav" class="developer-image">
+                    <div class="developer-info">
+                        <h3>Rushikesh Yadav</h3>
+                        <div class="role">Lead Developer</div>
+                        <p>Full-stack developer with expertise in web technologies and a passion for creating user-friendly applications.</p>
+                    </div>
+                </a>
+                <a href="https://leela-nayan.github.io/UIDPP1/" class="developer-card" target="_blank">
+                    <img src="images/leela.jpg" alt="Leela Nayan" class="developer-image">
+                    <div class="developer-info">
+                        <h3>Leela Nayan</h3>
+                        <div class="role">Frontend Developer</div>
+                        <p>Creative UI/UX designer and frontend developer focused on building beautiful and intuitive user interfaces.</p>
+                    </div>
+                </a>
+                <a href="https://rithwik034.github.io/rithwik034.portfolio/" class="developer-card" target="_blank">
+                    <img src="images/rithwik.jpg" alt="Rithwik" class="developer-image">
+                    <div class="developer-info">
+                        <h3>Rithwik</h3>
+                        <div class="role">Backend Developer</div>
+                        <p>Experienced backend developer specializing in scalable architecture and database optimization.</p>
+                    </div>
+                </a>
+                <a href="https://loki1004.github.io/portfolio/" class="developer-card" target="_blank">
+                    <img src="images/lokesh.jpg" alt="Lokesh" class="developer-image">
+                    <div class="developer-info">
+                        <h3>Lokesh</h3>
+                        <div class="role">UI/UX Designer</div>
+                        <p>Passionate designer with a keen eye for detail and a focus on creating engaging user experiences.</p>
+                    </div>
+                </a>
+                <a href="https://thecodescrewerr.github.io/-portfolio/" class="developer-card" target="_blank">
+                    <img src="images/mohith.jpg" alt="Mohith" class="developer-image">
+                    <div class="developer-info">
+                        <h3>Mohith</h3>
+                        <div class="role">Mobile Developer</div>
+                        <p>Expert in mobile app development with a focus on creating seamless cross-platform experiences.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search Profiles</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Safety Tips</a></li>
+                    <li><a href="#">Customer Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li>📍 Amritapuri, Kollam Dt</li>
+                    <li>📞 +91 7879342614</li>
+                    <li>✉️ vivahahub@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" class="social-link" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/" class="social-link" target="_blank">Instagram</a>
+                    <a href="https://twitter.com/" class="social-link" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/" class="social-link" target="_blank">LinkedIn</a>
+                </div>
+                <div class="app-download">
+                    <h4>Download Our App</h4>
+                    <div class="app-buttons">
+                        <a href="https://www.apple.com/app-store/" class="app-btn" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store" class="app-btn" target="_blank">Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Vivaha Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
