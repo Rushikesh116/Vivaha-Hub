@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Vivaha Hub</h1>
+        <h1 style="color: white; font-size: 2.5rem; margin: 0; padding: 1rem 0;">Vivaha Hub</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="search.html">Search</a>
@@ -21,175 +21,193 @@
     <main>
         <div class="register-container">
             <h2>Create Your Profile</h2>
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">Basic Info</div>
+                <div class="progress-step" data-step="2">Personal Details</div>
+                <div class="progress-step" data-step="3">Education & Career</div>
+                <div class="progress-step" data-step="4">Preferences</div>
+            </div>
             <form class="register-form">
-                <div class="form-group">
-                    <label>Profile Photo</label>
-                    <input type="file" accept="image/*" id="profile-photo">
-                    <img src="https://via.placeholder.com/150" alt="Profile Preview" class="image-preview">
+                <!-- Step 1: Basic Information -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-group">
+                        <label>Profile Photo</label>
+                        <input type="file" accept="image/*" id="profile-photo">
+                        <img src="https://via.placeholder.com/150" alt="Profile Preview" class="image-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" required placeholder="Enter your full name" name="fullname">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required placeholder="Enter your email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" required placeholder="Create a strong password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" required placeholder="Confirm your password" name="confirm-password">
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-primary next-step">Next</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" required placeholder="Enter your full name" name="fullname">
+
+                <!-- Step 2: Personal Details -->
+                <div class="form-step" data-step="2">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select required name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" required name="dob">
+                    </div>
+                    <div class="form-group">
+                        <label>Religion</label>
+                        <select required name="religion">
+                            <option value="">Select Religion</option>
+                            <option value="hindu">Hindu</option>
+                            <option value="muslim">Muslim</option>
+                            <option value="christian">Christian</option>
+                            <option value="sikh">Sikh</option>
+                            <option value="buddhist">Buddhist</option>
+                            <option value="jain">Jain</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Zodiac Sign</label>
+                        <select required name="zodiac">
+                            <option value="">Select Zodiac Sign</option>
+                            <option value="aries">Aries (Mar 21 - Apr 19)</option>
+                            <option value="taurus">Taurus (Apr 20 - May 20)</option>
+                            <option value="gemini">Gemini (May 21 - Jun 20)</option>
+                            <option value="cancer">Cancer (Jun 21 - Jul 22)</option>
+                            <option value="leo">Leo (Jul 23 - Aug 22)</option>
+                            <option value="virgo">Virgo (Aug 23 - Sep 22)</option>
+                            <option value="libra">Libra (Sep 23 - Oct 22)</option>
+                            <option value="scorpio">Scorpio (Oct 23 - Nov 21)</option>
+                            <option value="sagittarius">Sagittarius (Nov 22 - Dec 21)</option>
+                            <option value="capricorn">Capricorn (Dec 22 - Jan 19)</option>
+                            <option value="aquarius">Aquarius (Jan 20 - Feb 18)</option>
+                            <option value="pisces">Pisces (Feb 19 - Mar 20)</option>
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                        <button type="button" class="btn btn-primary next-step">Next</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" required placeholder="Enter your email" name="email">
+
+                <!-- Step 3: Education & Career -->
+                <div class="form-step" data-step="3">
+                    <div class="form-group">
+                        <label>Education</label>
+                        <select required name="education">
+                            <option value="">Select Education</option>
+                            <option value="high-school">High School</option>
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Occupation</label>
+                        <input type="text" placeholder="Enter your occupation" name="occupation">
+                    </div>
+                    <div class="form-group">
+                        <label>Annual Income</label>
+                        <select name="income">
+                            <option value="">Select Income Range</option>
+                            <option value="0-3">0-3 Lakhs</option>
+                            <option value="3-5">3-5 Lakhs</option>
+                            <option value="5-7">5-7 Lakhs</option>
+                            <option value="7-10">7-10 Lakhs</option>
+                            <option value="10+">10+ Lakhs</option>
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                        <button type="button" class="btn btn-primary next-step">Next</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" required placeholder="Create a strong password" name="password">
+
+                <!-- Step 4: Preferences -->
+                <div class="form-step" data-step="4">
+                    <div class="form-group">
+                        <label>Marital Status</label>
+                        <select required name="marital-status">
+                            <option value="">Select Status</option>
+                            <option value="never-married">Never Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                            <option value="awaiting-divorce">Awaiting Divorce</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Height</label>
+                        <select required name="height">
+                            <option value="">Select Height</option>
+                            <option value="4-6">4'6"</option>
+                            <option value="4-7">4'7"</option>
+                            <option value="4-8">4'8"</option>
+                            <option value="4-9">4'9"</option>
+                            <option value="4-10">4'10"</option>
+                            <option value="4-11">4'11"</option>
+                            <option value="5-0">5'0"</option>
+                            <option value="5-1">5'1"</option>
+                            <option value="5-2">5'2"</option>
+                            <option value="5-3">5'3"</option>
+                            <option value="5-4">5'4"</option>
+                            <option value="5-5">5'5"</option>
+                            <option value="5-6">5'6"</option>
+                            <option value="5-7">5'7"</option>
+                            <option value="5-8">5'8"</option>
+                            <option value="5-9">5'9"</option>
+                            <option value="5-10">5'10"</option>
+                            <option value="5-11">5'11"</option>
+                            <option value="6-0">6'0"</option>
+                            <option value="6-1">6'1"</option>
+                            <option value="6-2">6'2"</option>
+                            <option value="6-3">6'3"</option>
+                            <option value="6-4">6'4"</option>
+                            <option value="6-5">6'5"</option>
+                            <option value="6-6">6'6"</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" placeholder="Enter your city" name="location">
+                    </div>
+                    <div class="form-group">
+                        <label>About Yourself</label>
+                        <textarea rows="4" placeholder="Tell us about yourself, your interests, and what you're looking for" name="about"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner Preferences</label>
+                        <textarea rows="4" placeholder="Describe your ideal partner" name="partner-preferences"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required name="terms">
+                            I agree to the Terms and Conditions
+                        </label>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                        <button type="submit" class="btn btn-primary">Create Profile</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" required placeholder="Confirm your password" name="confirm-password">
-                </div>
-                <div class="form-group">
-                    <label>Gender</label>
-                    <select required name="gender">
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Date of Birth</label>
-                    <input type="date" required name="dob">
-                </div>
-                <div class="form-group">
-                    <label>Religion</label>
-                    <select required name="religion">
-                        <option value="">Select Religion</option>
-                        <option value="hindu">Hindu</option>
-                        <option value="muslim">Muslim</option>
-                        <option value="christian">Christian</option>
-                        <option value="sikh">Sikh</option>
-                        <option value="buddhist">Buddhist</option>
-                        <option value="jain">Jain</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Zodiac Sign</label>
-                    <select required name="zodiac">
-                        <option value="">Select Zodiac Sign</option>
-                        <option value="aries">Aries (Mar 21 - Apr 19)</option>
-                        <option value="taurus">Taurus (Apr 20 - May 20)</option>
-                        <option value="gemini">Gemini (May 21 - Jun 20)</option>
-                        <option value="cancer">Cancer (Jun 21 - Jul 22)</option>
-                        <option value="leo">Leo (Jul 23 - Aug 22)</option>
-                        <option value="virgo">Virgo (Aug 23 - Sep 22)</option>
-                        <option value="libra">Libra (Sep 23 - Oct 22)</option>
-                        <option value="scorpio">Scorpio (Oct 23 - Nov 21)</option>
-                        <option value="sagittarius">Sagittarius (Nov 22 - Dec 21)</option>
-                        <option value="capricorn">Capricorn (Dec 22 - Jan 19)</option>
-                        <option value="aquarius">Aquarius (Jan 20 - Feb 18)</option>
-                        <option value="pisces">Pisces (Feb 19 - Mar 20)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Mother Tongue</label>
-                    <select required name="mother-tongue">
-                        <option value="">Select Language</option>
-                        <option value="hindi">Hindi</option>
-                        <option value="english">English</option>
-                        <option value="punjabi">Punjabi</option>
-                        <option value="gujarati">Gujarati</option>
-                        <option value="marathi">Marathi</option>
-                        <option value="tamil">Tamil</option>
-                        <option value="telugu">Telugu</option>
-                        <option value="kannada">Kannada</option>
-                        <option value="malayalam">Malayalam</option>
-                        <option value="bengali">Bengali</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Education</label>
-                    <select required name="education">
-                        <option value="">Select Education</option>
-                        <option value="high-school">High School</option>
-                        <option value="bachelors">Bachelor's Degree</option>
-                        <option value="masters">Master's Degree</option>
-                        <option value="phd">PhD</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Occupation</label>
-                    <input type="text" placeholder="Enter your occupation" name="occupation">
-                </div>
-                <div class="form-group">
-                    <label>Annual Income</label>
-                    <select name="income">
-                        <option value="">Select Income Range</option>
-                        <option value="0-3">0-3 Lakhs</option>
-                        <option value="3-5">3-5 Lakhs</option>
-                        <option value="5-7">5-7 Lakhs</option>
-                        <option value="7-10">7-10 Lakhs</option>
-                        <option value="10+">10+ Lakhs</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Marital Status</label>
-                    <select required name="marital-status">
-                        <option value="">Select Status</option>
-                        <option value="never-married">Never Married</option>
-                        <option value="divorced">Divorced</option>
-                        <option value="widowed">Widowed</option>
-                        <option value="awaiting-divorce">Awaiting Divorce</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Height</label>
-                    <select required name="height">
-                        <option value="">Select Height</option>
-                        <option value="4-6">4'6"</option>
-                        <option value="4-7">4'7"</option>
-                        <option value="4-8">4'8"</option>
-                        <option value="4-9">4'9"</option>
-                        <option value="4-10">4'10"</option>
-                        <option value="4-11">4'11"</option>
-                        <option value="5-0">5'0"</option>
-                        <option value="5-1">5'1"</option>
-                        <option value="5-2">5'2"</option>
-                        <option value="5-3">5'3"</option>
-                        <option value="5-4">5'4"</option>
-                        <option value="5-5">5'5"</option>
-                        <option value="5-6">5'6"</option>
-                        <option value="5-7">5'7"</option>
-                        <option value="5-8">5'8"</option>
-                        <option value="5-9">5'9"</option>
-                        <option value="5-10">5'10"</option>
-                        <option value="5-11">5'11"</option>
-                        <option value="6-0">6'0"</option>
-                        <option value="6-1">6'1"</option>
-                        <option value="6-2">6'2"</option>
-                        <option value="6-3">6'3"</option>
-                        <option value="6-4">6'4"</option>
-                        <option value="6-5">6'5"</option>
-                        <option value="6-6">6'6"</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" placeholder="Enter your city" name="location">
-                </div>
-                <div class="form-group">
-                    <label>About Yourself</label>
-                    <textarea rows="4" placeholder="Tell us about yourself, your interests, and what you're looking for" name="about"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Partner Preferences</label>
-                    <textarea rows="4" placeholder="Describe your ideal partner" name="partner-preferences"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" required name="terms">
-                        I agree to the Terms and Conditions
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary register-btn">Create Profile</button>
             </form>
             <div class="form-links">
                 <p>Already have an account? <a href="login.html">Login here</a></p>
@@ -211,11 +229,11 @@
             <div class="footer-section">
                 <h3>Help & Support</h3>
                 <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Safety Tips</a></li>
-                    <li><a href="#">Customer Support</a></li>
+                    <li><a href="#">View Privacy Policy</a></li>
+                    <li><a href="#">Read Terms of Service</a></li>
+                    <li><a href="#">Frequently Asked Questions</a></li>
+                    <li><a href="#">Marriage Safety Tips</a></li>
+                    <li><a href="#">Contact Customer Support</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -226,27 +244,8 @@
                     <li>✉️ contact@vivahahub.com</li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="#" class="social-link">Facebook</a>
-                    <a href="#" class="social-link">Instagram</a>
-                    <a href="#" class="social-link">Twitter</a>
-                    <a href="#" class="social-link">LinkedIn</a>
-                </div>
-                <div class="app-download">
-                    <h4>Download Our App</h4>
-                    <div class="app-buttons">
-                        <a href="#" class="app-btn">App Store</a>
-                        <a href="#" class="app-btn">Google Play</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Vivaha Hub. All rights reserved.</p>
         </div>
     </footer>
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
