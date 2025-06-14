@@ -61,4 +61,51 @@ document.addEventListener('DOMContentLoaded', () => {
             renderShortlistedProfiles();
         }
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    
+    if (userData) {
+        // Update profile picture
+        const profilePicture = document.querySelector('.profile-picture');
+        if (profilePicture) {
+            profilePicture.src = userData.profilePhoto;
+        }
+
+        // Update user info
+        const userInfo = document.querySelector('.user-info h2');
+        if (userInfo) {
+            userInfo.textContent = `Welcome, ${userData.fullname}`;
+        }
+
+        // Update profile ID (you can generate a unique ID based on email or other data)
+        const profileId = document.querySelector('.user-info p');
+        if (profileId) {
+            const id = 'VH' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            profileId.textContent = `Profile ID: ${id}`;
+        }
+
+        // Update member since date
+        const memberSince = document.querySelectorAll('.user-info p')[1];
+        if (memberSince) {
+            const date = new Date();
+            const month = date.toLocaleString('default', { month: 'long' });
+            memberSince.textContent = `Member Since: ${month} ${date.getFullYear()}`;
+        }
+
+        // Calculate profile completion percentage
+        const requiredFields = ['fullname', 'gender', 'dob', 'religion', 'education', 'occupation', 'location', 'about'];
+        const completedFields = requiredFields.filter(field => userData[field] && userData[field].trim() !== '');
+        const completionPercentage = Math.round((completedFields.length / requiredFields.length) * 100);
+
+        // Update profile completion
+        const progressBar = document.querySelector('.progress');
+        const completionText = document.querySelector('.profile-completion p');
+        if (progressBar && completionText) {
+            progressBar.style.width = `${completionPercentage}%`;
+            completionText.textContent = `${completionPercentage}% Complete`;
+        }
+    }
 }); 
