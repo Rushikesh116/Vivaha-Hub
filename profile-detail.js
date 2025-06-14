@@ -107,4 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem('shortlistedProfiles', JSON.stringify(shortlistedProfiles));
     });
+
+    // Premium check for astrological details
+    const isPremium = localStorage.getItem('isPremium') === 'true';
+    const astroSection = document.getElementById('astroSection');
+    const astroPrompt = document.getElementById('astroPremiumPrompt');
+    if (!isPremium) {
+        astroSection.style.display = 'none';
+        astroPrompt.style.display = 'block';
+        astroPrompt.innerHTML = `
+            <h3>Astrological Details</h3>
+            <div style="margin:1.5rem 0; font-size:1.1rem; color:#b00;">Unlock Premium to view astrological details for this profile.</div>
+            <a href="premium.html" class="btn btn-primary">Unlock Premium</a>
+        `;
+    } else {
+        astroSection.style.display = 'block';
+        astroPrompt.style.display = 'none';
+    }
 }); 
